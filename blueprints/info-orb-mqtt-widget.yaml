@@ -1,0 +1,479 @@
+blueprint:
+  name: Info Orb MQTT Widgets
+  description: Creates Info Orb widgets from HA sensors
+  domain: automation
+
+  input:
+    trigger_minutes:
+      name: Trigger every X Minutes
+      description: "Select time pattern frequency to run automation"
+      selector:
+        select:
+          options:
+            - "/2"
+            - "/5"
+            - "/10"
+            - "/15"
+            - "/30"
+            - "/60"
+            - "/120"
+            - "/180"
+      default: "/5"
+    orb_topic:
+      name: Info Org MQTT setup topic
+      description: "This has to match the topic defined the config.h file (MQTT_SETUP_TOPIC)"
+      selector:
+        text:
+      default: "info-orbs/setup/orbs"
+
+    orb1_description:
+      name: "Orb 1: description"
+      default: "Time"
+    orb1_topic:
+      name: "Orb 1: MQTT topic"
+      default: "info-orbs/orb/0"
+    orb1_template:
+      name: "Orb 1: template"
+      default: "{{ states('sensor.time') }}"
+      description: >-
+        Template exposing something in Home Assistant e.g. {{ states('sensor.weather_station_temperature') | float | round(0) }}
+      selector:
+        text:
+          multiline: true
+    orb1_unit_of_measure:
+      name: "Orb 1: Unit of Measure e.g. %, kWh, °c, mph, inHg"
+      default: " "
+    orb1_bg_color:
+      name: "Orb 1: Background Color"
+      default: &default_bg_color "TFT_DARKGREEN"
+      selector:
+        select:
+          mode: dropdown
+          options: &colors_list
+            - "TFT_BLACK"
+            - "TFT_WHITE"
+            - "TFT_GREEN"
+            - "TFT_NAVY"
+            - "TFT_DARKGREEN"
+            - "TFT_DARKCYAN"
+            - "TFT_MAROON"
+            - "TFT_PURPLE"
+            - "TFT_OLIVE"
+            - "TFT_LIGHTGREY"
+            - "TFT_DARKGREY"
+            - "TFT_BLUE"
+            - "TFT_GREEN"
+            - "TFT_CYAN"
+            - "TFT_RED"
+            - "TFT_MAGENTA"
+            - "TFT_YELLOW"
+            - "TFT_WHITE"
+            - "TFT_ORANGE"
+            - "TFT_GREENYELLOW"
+            - "TFT_PINK"
+            - "TFT_BROWN"
+            - "TFT_GOLD"
+            - "TFT_SILVER"
+            - "TFT_SKYBLUE"
+            - "TFT_VIOLET"
+    orb1_textcol:
+      name: "Orb 1: Text Color"
+      default: &default_text_col "TFT_WHITE"
+      selector:
+        select:
+          mode: dropdown
+          options: *colors_list
+    orb1_size:
+      name: "Orb 1: Size"
+      default: 20
+      selector:
+        number:
+          min: 10
+          max: 60
+          mode: slider
+    orb1_text_position:
+      name: "Orb 1: Text position X-Y e.g. 100-110"
+      default: "100-110"
+    orb1_value_position:
+      name: "Orb 1: Value position X-Y e.g. 130-140"
+      default: "130-140"
+
+    orb2_description:
+      name: "Orb 2: description"
+      default: "Day of week"
+    orb2_topic:
+      name: "Orb 2: MQTT topic"
+      default: "info-orbs/orb/1"
+    orb2_template:
+      name: "Orb 2: template"
+      default: "{{ now().strftime('%A') }}"
+      description: >-
+        Template exposing something in Home Assistant e.g. {{ states('sensor.weather_station_humidity') | float | round(1) }}
+      selector:
+        text:
+          multiline: true
+    orb2_unit_of_measure:
+      name: "Orb 2: Unit of Measure e.g. %, kWh, °c, mph, inHg"
+      default: " "
+    orb2_bg_color:
+      name: "Orb 2: Background Color"
+      default: *default_bg_color
+      selector:
+        select:
+          mode: dropdown
+          options: *colors_list
+    orb2_textcol:
+      name: "Orb 2: Text Color"
+      default: *default_text_col
+      selector:
+        select:
+          mode: dropdown
+          options: *colors_list
+    orb2_size:
+      name: "Orb 2: Size"
+      default: 20
+      selector:
+        number:
+          min: 10
+          max: 60
+          mode: slider
+    orb2_text_position:
+      name: "Orb 2: Text position X-Y e.g. 100-110"
+      default: "100-110"
+    orb2_value_position:
+      name: "Orb 2: Value position X-Y e.g. 130-140"
+      default: "130-140"
+
+    orb3_description:
+      name: "Orb 3: description"
+      default: "Sun Rise"
+    orb3_topic:
+      name: "Orb 3: MQTT topic"
+      default: "info-orbs/orb/2"
+    orb3_template:
+      name: "Orb 3: template"
+      default: "{{ as_timestamp(state_attr('sun.sun', 'next_rising')) | timestamp_custom('%I:%M %p') }}"
+      description: >-
+        Template exposing something in Home Assistant e.g. {{ states('sensor.weather_station_wind_speed') | float | round(1) }}
+      selector:
+        text:
+          multiline: true
+    orb3_unit_of_measure:
+      name: "Orb 3: Unit of Measure e.g. %, kWh, °c, mph, inHg"
+      default: " "
+    orb3_bg_color:
+      name: "Orb 3: Background Color"
+      default: *default_bg_color
+      selector:
+        select:
+          mode: dropdown
+          options: *colors_list
+    orb3_textcol:
+      name: "Orb 3: Text Color"
+      default: *default_text_col
+      selector:
+        select:
+          mode: dropdown
+          options: *colors_list
+    orb3_size:
+      name: "Orb 3: Size"
+      default: 20
+      selector:
+        number:
+          min: 10
+          max: 60
+          mode: slider
+    orb3_text_position:
+      name: "Orb 3: Text position X-Y e.g. 100-110"
+      default: "100-110"
+    orb3_value_position:
+      name: "Orb 3: Value position X-Y e.g. 130-140"
+      default: "130-140"
+
+    orb4_description:
+      name: "Orb 4: description"
+      default: "Sun Angle"
+    orb4_topic:
+      name: "Orb 4: MQTT topic"
+      default: "info-orbs/orb/3"
+    orb4_template:
+      name: "Orb 4: template"
+      description: >-
+        Template exposing something in Home Assistant e.g. {{ states('sensor.weather_station_air_pressure') | float | round(2) }}
+      default: >-
+        {{ states('sensor.solar_angle') | float | round(0) }}
+      selector:
+        text:
+          multiline: true
+    orb4_unit_of_measure:
+      name: "Orb 4: Unit of Measure e.g. %, kWh, °c, mph, inHg"
+      default: " degrees"
+    orb4_bg_color:
+      name: "Orb 4: Background Color"
+      default: *default_bg_color
+      selector:
+        select:
+          mode: dropdown
+          options: *colors_list
+    orb4_textcol:
+      name: "Orb 4: Text Color"
+      default: *default_text_col
+      selector:
+        select:
+          mode: dropdown
+          options: *colors_list
+    orb4_size:
+      name: "Orb 4: Size"
+      default: 20
+      selector:
+        number:
+          min: 10
+          max: 60
+          mode: slider
+    orb4_text_position:
+      name: "Orb 4: Text position X-Y e.g. 100-110"
+      default: "100-110"
+    orb4_value_position:
+      name: "Orb 4: Value position X-Y e.g. 130-140"
+      default: "130-140"
+
+    orb5_description:
+      name: "Orb 5: description"
+      default: "Date"
+    orb5_topic:
+      name: "Orb 5: MQTT topic"
+      default: "info-orbs/orb/4"
+    orb5_template:
+      name: "Orb 5: template"
+      default: "{{ states('sensor.date') }}"
+      description: >-
+        Template exposing something in Home Assistant e.g. {{ states('sensor.weather_hub_sensors_battery') | float | round(1) }}
+      selector:
+        text:
+          multiline: true
+    orb5_unit_of_measure:
+      name: "Orb 5: Unit of Measure e.g. %, kWh, °c, mph, inHg"
+      default: " "
+    orb5_bg_color:
+      name: "Orb 5: Background Color"
+      default: *default_bg_color
+      selector:
+        select:
+          mode: dropdown
+          options: *colors_list
+    orb5_textcol:
+      name: "Orb 5: Text Color"
+      default: *default_text_col
+      selector:
+        select:
+          mode: dropdown
+          options: *colors_list
+    orb5_size:
+      name: "Orb 5: Size"
+      default: 20
+      selector:
+        number:
+          min: 10
+          max: 60
+          mode: slider
+    orb5_text_position:
+      name: "Orb 5: Text position X-Y e.g. 100-110"
+      default: "100-110"
+    orb5_value_position:
+      name: "Orb 5: Value position X-Y e.g. 130-140"
+      default: "130-140"
+
+variables:
+  orb1_description_var: !input "orb1_description"
+  orb2_description_var: !input "orb2_description"
+  orb3_description_var: !input "orb3_description"
+  orb4_description_var: !input "orb4_description"
+  orb5_description_var: !input "orb5_description"
+  orb1_bg_color_var: !input "orb1_bg_color"
+  orb2_bg_color_var: !input "orb2_bg_color"
+  orb3_bg_color_var: !input "orb3_bg_color"
+  orb4_bg_color_var: !input "orb4_bg_color"
+  orb5_bg_color_var: !input "orb5_bg_color"
+  orb1_textcol_var: !input "orb1_textcol"
+  orb2_textcol_var: !input "orb2_textcol"
+  orb3_textcol_var: !input "orb3_textcol"
+  orb4_textcol_var: !input "orb4_textcol"
+  orb5_textcol_var: !input "orb5_textcol"
+  orb1_topic_var: !input "orb1_topic"
+  orb2_topic_var: !input "orb2_topic"
+  orb3_topic_var: !input "orb3_topic"
+  orb4_topic_var: !input "orb4_topic"
+  orb5_topic_var: !input "orb5_topic"
+  orb1_template_var: !input "orb1_template"
+  orb2_template_var: !input "orb2_template"
+  orb3_template_var: !input "orb3_template"
+  orb4_template_var: !input "orb4_template"
+  orb5_template_var: !input "orb5_template"
+  orb1_unit_of_measure_var: !input "orb1_unit_of_measure"
+  orb2_unit_of_measure_var: !input "orb2_unit_of_measure"
+  orb3_unit_of_measure_var: !input "orb3_unit_of_measure"
+  orb4_unit_of_measure_var: !input "orb4_unit_of_measure"
+  orb5_unit_of_measure_var: !input "orb5_unit_of_measure"
+  orb1_size_var: !input "orb1_size"
+  orb2_size_var: !input "orb2_size"
+  orb3_size_var: !input "orb3_size"
+  orb4_size_var: !input "orb4_size"
+  orb5_size_var: !input "orb5_size"
+  orb1_text_position_var: !input "orb1_text_position"
+  orb2_text_position_var: !input "orb2_text_position"
+  orb3_text_position_var: !input "orb3_text_position"
+  orb4_text_position_var: !input "orb4_text_position"
+  orb5_text_position_var: !input "orb5_text_position"
+  orb1_value_position_var: !input "orb1_value_position"
+  orb2_value_position_var: !input "orb2_value_position"
+  orb3_value_position_var: !input "orb3_value_position"
+  orb4_value_position_var: !input "orb4_value_position"
+  orb5_value_position_var: !input "orb5_value_position"
+
+triggers:
+  - trigger: time_pattern
+    minutes: !input "trigger_minutes"
+conditions: []
+actions:
+  - action: mqtt.publish
+    metadata: {}
+    data:
+      evaluate_payload: false
+      retain: false
+      topic: !input "orb_topic"
+      payload: |-
+        {
+          "orbs": [
+            {
+              "orbid": 0,
+              "orbdesc": "{{ orb1_description_var }}",
+              "orb-bg": "{{ orb1_bg_color_var }}",
+              "orb-textcol": "{{ orb1_textcol_var }}",
+              "topicsrc": "{{ orb1_topic_var }}",
+              "xpostxt": "{{ orb1_text_position_var.split('-')[0] }}",
+              "ypostxt": "{{ orb1_text_position_var.split('-')[1] }}",
+              "xposval": {{ orb1_value_position_var.split('-')[0] }},
+              "yposval": {{ orb1_value_position_var.split('-')[1] }},
+              "orbsize": "{{ orb1_size_var }}",
+              "orbvalunit": "{{ orb1_unit_of_measure_var }}",
+              "jsonfield": "orb1"  
+            },
+            {
+              "orbid": 1,
+              "orbdesc": "{{ orb2_description_var }}",
+              "orb-bg": "{{ orb2_bg_color_var }}",
+              "orb-textcol": "{{ orb2_textcol_var }}",
+              "topicsrc": "{{ orb2_topic_var }}",
+              "xpostxt": "{{ orb2_text_position_var.split('-')[0] }}",
+              "ypostxt": "{{ orb2_text_position_var.split('-')[1] }}",
+              "xposval": {{ orb2_value_position_var.split('-')[0] }},
+              "yposval": {{ orb2_value_position_var.split('-')[1] }},
+              "orbsize": {{ orb2_size_var }},
+              "orbvalunit": "{{ orb2_unit_of_measure_var }}",
+              "jsonfield": "orb2"
+            },
+            {
+              "orbid": 2,
+              "orbdesc": "{{ orb3_description_var }}",
+              "orb-bg": "{{ orb3_bg_color_var }}",
+              "orb-textcol": "{{ orb3_textcol_var }}",
+              "topicsrc": "{{ orb3_topic_var }}",
+              "xpostxt": "{{ orb3_text_position_var.split('-')[0] }}",
+              "ypostxt": "{{ orb3_text_position_var.split('-')[1] }}",
+              "xposval": {{ orb3_value_position_var.split('-')[0] }},
+              "yposval": {{ orb3_value_position_var.split('-')[1] }},
+              "orbsize": {{ orb3_size_var }},
+              "orbvalunit": "{{ orb3_unit_of_measure_var }}",
+              "jsonfield": "orb3"              
+            },
+            {
+              "orbid": 3,
+              "orbdesc": "{{ orb4_description_var }}",
+              "orb-bg": "{{ orb4_bg_color_var }}",
+              "orb-textcol": "{{ orb4_textcol_var }}",
+              "topicsrc": "{{ orb4_topic_var }}",
+              "xpostxt": "{{ orb4_text_position_var.split('-')[0] }}",
+              "ypostxt": "{{ orb4_text_position_var.split('-')[1] }}",
+              "xposval": {{ orb4_value_position_var.split('-')[0] }},
+              "yposval": {{ orb4_value_position_var.split('-')[1] }},
+              "orbsize": {{ orb4_size_var }},
+              "orbvalunit": "{{ orb4_unit_of_measure_var }}",
+              "jsonfield": "orb4"  
+            },
+            {
+              "orbid": 4,
+              "orbdesc": "{{ orb5_description_var }}",
+              "orb-bg": "{{ orb5_bg_color_var }}",
+              "orb-textcol": "{{ orb5_textcol_var }}",
+              "topicsrc": "{{ orb5_topic_var }}",
+              "xpostxt": "{{ orb5_text_position_var.split('-')[0] }}",
+              "ypostxt": "{{ orb5_text_position_var.split('-')[1] }}",
+              "xposval": {{ orb5_value_position_var.split('-')[0] }},
+              "yposval": {{ orb5_value_position_var.split('-')[1] }},
+              "orbsize": {{ orb5_size_var }},
+              "orbvalunit": "{{ orb5_unit_of_measure_var }}",
+              "jsonfield": "orb5"
+            }
+          ]
+        }
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 3
+      milliseconds: 0
+  - action: mqtt.publish
+    metadata: {}
+    data:
+      evaluate_payload: false
+      qos: 0
+      retain: false
+      payload: |-
+        {
+          "orb1": "{{ orb1_template_var }}"
+        }
+      topic: "{{ orb1_topic_var }}"
+  - action: mqtt.publish
+    metadata: {}
+    data:
+      evaluate_payload: false
+      qos: 0
+      retain: false
+      payload: |-
+        {
+          "orb2": "{{ orb2_template_var }}"
+        }
+      topic: "{{ orb2_topic_var }}"
+  - action: mqtt.publish
+    metadata: {}
+    data:
+      evaluate_payload: false
+      qos: 0
+      retain: false
+      payload: |-
+        {
+          "orb3": "{{ orb3_template_var }}"
+        }
+      topic: "{{ orb3_topic_var }}"
+  - action: mqtt.publish
+    metadata: {}
+    data:
+      evaluate_payload: false
+      qos: 0
+      retain: false
+      payload: |-
+        {
+          "orb4": "{{ orb4_template_var }}"
+        }
+      topic: "{{ orb4_topic_var }}"
+  - action: mqtt.publish
+    metadata: {}
+    data:
+      evaluate_payload: false
+      qos: 0
+      retain: true
+      payload: |-
+        {
+          "orb5": "{{ orb5_template_var }}"
+        }
+      topic: "{{ orb5_topic_var }}"
+mode: single
