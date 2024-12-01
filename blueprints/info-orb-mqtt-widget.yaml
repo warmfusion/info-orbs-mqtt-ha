@@ -2,6 +2,7 @@ blueprint:
   name: Info Orb MQTT Widgets
   description: Creates Info Orb widgets from HA sensors
   domain: automation
+  source: https://github.com/dreed47/info-orbs-mqtt-ha/blob/main/blueprints/info-orb-mqtt-widget.yaml
 
   input:
     trigger_minutes:
