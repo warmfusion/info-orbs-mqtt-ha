@@ -336,7 +336,7 @@ triggers:
     minutes: !input "trigger_minutes"
 conditions: []
 actions:
-  - action: mqtt.publish
+  - action: mqtt.publish # orb setup
     metadata: {}
     data:
       evaluate_payload: false
@@ -420,9 +420,9 @@ actions:
   - delay:
       hours: 0
       minutes: 0
-      seconds: 3
+      seconds: 2
       milliseconds: 0
-  - action: mqtt.publish
+  - action: mqtt.publish # orb 1
     metadata: {}
     data:
       evaluate_payload: false
