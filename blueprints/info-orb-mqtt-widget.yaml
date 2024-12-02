@@ -50,32 +50,57 @@ blueprint:
         select:
           mode: dropdown
           options: &colors_list
-            - "TFT_BLACK"
-            - "TFT_WHITE"
-            - "TFT_GREEN"
-            - "TFT_NAVY"
-            - "TFT_DARKGREEN"
-            - "TFT_DARKCYAN"
-            - "TFT_MAROON"
-            - "TFT_PURPLE"
-            - "TFT_OLIVE"
-            - "TFT_LIGHTGREY"
-            - "TFT_DARKGREY"
-            - "TFT_BLUE"
-            - "TFT_GREEN"
-            - "TFT_CYAN"
-            - "TFT_RED"
-            - "TFT_MAGENTA"
-            - "TFT_YELLOW"
-            - "TFT_WHITE"
-            - "TFT_ORANGE"
-            - "TFT_GREENYELLOW"
-            - "TFT_PINK"
-            - "TFT_BROWN"
-            - "TFT_GOLD"
-            - "TFT_SILVER"
-            - "TFT_SKYBLUE"
-            - "TFT_VIOLET"
+            - label: BLACK
+              value: "TFT_BLACK"
+            - label: WHITE
+              value: "TFT_WHITE"
+            - label: GREEN
+              value: "TFT_GREEN"
+            - label: NAVY
+              value: "TFT_NAVY"
+            - label: "DARK GREEN"
+              value: "TFT_DARKGREEN"
+            - label: "DARK CYAN"
+              value: "TFT_DARKCYAN"
+            - label: MAROON
+              value: "TFT_MAROON"
+            - label: PURPLE
+              value: "TFT_PURPLE"
+            - label: OLIVE
+              value: "TFT_OLIVE"
+            - label: "LIGHT GREY"
+              value: "TFT_LIGHTGREY"
+            - label: "DARK GREY"
+              value: "TFT_DARKGREY"
+            - label: BLUE
+              value: "TFT_BLUE"
+            - label: GREEN
+              value: "TFT_GREEN"
+            - label: CYAN
+              value: "TFT_CYAN"
+            - label: RED
+              value: "TFT_RED"
+            - label: MAGENTA
+              value: "TFT_MAGENTA"
+            - label: YELLOW
+              value: "TFT_YELLOW"
+            - label: ORANGE
+              value: "TFT_ORANGE"
+            - label: "GREEN YELLOW"
+              value: "TFT_GREENYELLOW"
+            - label: PINK
+              value: "TFT_PINK"
+            - label: BROWN
+              value: "TFT_BROWN"
+            - label: GOLD
+              value: "TFT_GOLD"
+            - label: SILVER
+              value: "TFT_SILVER"
+            - label: "SKY BLUE"
+              value: "TFT_SKYBLUE"
+            - label: VIOLET
+              value: "TFT_VIOLET"
+
     orb1_textcol:
       name: "Orb 1: Text Color"
       default: &default_text_col "TFT_WHITE"
@@ -115,7 +140,7 @@ blueprint:
           min: 0
           max: 300
           mode: slider
-          
+
     orb2_description:
       name: "Orb 2: description"
       default: "Day of week"
@@ -243,7 +268,7 @@ blueprint:
           min: 0
           max: 300
           mode: slider
-          
+
     orb4_description:
       name: "Orb 4: description"
       default: "Sun Angle"
@@ -424,7 +449,7 @@ variables:
   orb5_text_y_position_var: !input "orb5_text_y_position"
   orb5_value_x_position_var: !input "orb5_value_x_position"
   orb5_value_y_position_var: !input "orb5_value_y_position"
-      
+
 triggers:
   - trigger: time_pattern
     minutes: !input "trigger_minutes"
