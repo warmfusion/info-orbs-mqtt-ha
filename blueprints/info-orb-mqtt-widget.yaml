@@ -26,7 +26,6 @@ blueprint:
       selector:
         text:
       default: "info-orbs/setup/orbs"
-
     orb1_description:
       name: "Orb 1: description"
       default: "Time"
@@ -92,13 +91,31 @@ blueprint:
           min: 10
           max: 60
           mode: slider
-    orb1_text_position:
-      name: "Orb 1: Text position X-Y e.g. 100-110"
-      default: "100-110"
-    orb1_value_position:
-      name: "Orb 1: Value position X-Y e.g. 130-140"
-      default: "130-140"
-
+    orb1_text_y_position:
+      name: "Orb 1: Label Y position"
+      default: 100
+      selector:
+        number:
+          min: 0
+          max: 300
+          mode: slider
+    orb1_value_x_position:
+      name: "Orb 1: Value X position"
+      default: 130
+      selector:
+        number:
+          min: 0
+          max: 300
+          mode: slider
+    orb1_value_y_position:
+      name: "Orb 1: Value Y position"
+      default: 140
+      selector:
+        number:
+          min: 0
+          max: 300
+          mode: slider
+          
     orb2_description:
       name: "Orb 2: description"
       default: "Day of week"
@@ -138,12 +155,30 @@ blueprint:
           min: 10
           max: 60
           mode: slider
-    orb2_text_position:
-      name: "Orb 2: Text position X-Y e.g. 100-110"
-      default: "100-110"
-    orb2_value_position:
-      name: "Orb 2: Value position X-Y e.g. 130-140"
-      default: "130-140"
+    orb2_text_y_position:
+      name: "Orb 2: Label Y position"
+      default: 100
+      selector:
+        number:
+          min: 0
+          max: 300
+          mode: slider
+    orb2_value_x_position:
+      name: "Orb 2: Value X position"
+      default: 130
+      selector:
+        number:
+          min: 0
+          max: 300
+          mode: slider
+    orb2_value_y_position:
+      name: "Orb 2: Value Y position"
+      default: 140
+      selector:
+        number:
+          min: 0
+          max: 300
+          mode: slider
 
     orb3_description:
       name: "Orb 3: description"
@@ -184,13 +219,31 @@ blueprint:
           min: 10
           max: 60
           mode: slider
-    orb3_text_position:
-      name: "Orb 3: Text position X-Y e.g. 100-110"
-      default: "100-110"
-    orb3_value_position:
-      name: "Orb 3: Value position X-Y e.g. 130-140"
-      default: "130-140"
-
+    orb3_text_y_position:
+      name: "Orb 3: Label Y position"
+      default: 100
+      selector:
+        number:
+          min: 0
+          max: 300
+          mode: slider
+    orb3_value_x_position:
+      name: "Orb 3: Value X position"
+      default: 130
+      selector:
+        number:
+          min: 0
+          max: 300
+          mode: slider
+    orb3_value_y_position:
+      name: "Orb 3: Value Y position"
+      default: 140
+      selector:
+        number:
+          min: 0
+          max: 300
+          mode: slider
+          
     orb4_description:
       name: "Orb 4: description"
       default: "Sun Angle"
@@ -231,12 +284,30 @@ blueprint:
           min: 10
           max: 60
           mode: slider
-    orb4_text_position:
-      name: "Orb 4: Text position X-Y e.g. 100-110"
-      default: "100-110"
-    orb4_value_position:
-      name: "Orb 4: Value position X-Y e.g. 130-140"
-      default: "130-140"
+    orb4_text_y_position:
+      name: "Orb 4: Label Y position"
+      default: 100
+      selector:
+        number:
+          min: 0
+          max: 300
+          mode: slider
+    orb4_value_x_position:
+      name: "Orb 4: Value X position"
+      default: 130
+      selector:
+        number:
+          min: 0
+          max: 300
+          mode: slider
+    orb4_value_y_position:
+      name: "Orb 4: Value Y position"
+      default: 140
+      selector:
+        number:
+          min: 0
+          max: 300
+          mode: slider
 
     orb5_description:
       name: "Orb 5: description"
@@ -277,12 +348,30 @@ blueprint:
           min: 10
           max: 60
           mode: slider
-    orb5_text_position:
-      name: "Orb 5: Text position X-Y e.g. 100-110"
-      default: "100-110"
-    orb5_value_position:
-      name: "Orb 5: Value position X-Y e.g. 130-140"
-      default: "130-140"
+    orb5_text_y_position:
+      name: "Orb 5: Label Y position"
+      default: 100
+      selector:
+        number:
+          min: 0
+          max: 300
+          mode: slider
+    orb5_value_x_position:
+      name: "Orb 5: Value X position"
+      default: 130
+      selector:
+        number:
+          min: 0
+          max: 300
+          mode: slider
+    orb5_value_y_position:
+      name: "Orb 5: Value Y position"
+      default: 140
+      selector:
+        number:
+          min: 0
+          max: 300
+          mode: slider
 
 variables:
   orb1_description_var: !input "orb1_description"
@@ -320,17 +409,22 @@ variables:
   orb3_size_var: !input "orb3_size"
   orb4_size_var: !input "orb4_size"
   orb5_size_var: !input "orb5_size"
-  orb1_text_position_var: !input "orb1_text_position"
-  orb2_text_position_var: !input "orb2_text_position"
-  orb3_text_position_var: !input "orb3_text_position"
-  orb4_text_position_var: !input "orb4_text_position"
-  orb5_text_position_var: !input "orb5_text_position"
-  orb1_value_position_var: !input "orb1_value_position"
-  orb2_value_position_var: !input "orb2_value_position"
-  orb3_value_position_var: !input "orb3_value_position"
-  orb4_value_position_var: !input "orb4_value_position"
-  orb5_value_position_var: !input "orb5_value_position"
-
+  orb1_text_y_position_var: !input "orb1_text_y_position"
+  orb1_value_x_position_var: !input "orb1_value_x_position"
+  orb1_value_y_position_var: !input "orb1_value_y_position"
+  orb2_text_y_position_var: !input "orb2_text_y_position"
+  orb2_value_x_position_var: !input "orb2_value_x_position"
+  orb2_value_y_position_var: !input "orb2_value_y_position"
+  orb3_text_y_position_var: !input "orb3_text_y_position"
+  orb3_value_x_position_var: !input "orb3_value_x_position"
+  orb3_value_y_position_var: !input "orb3_value_y_position"
+  orb4_text_y_position_var: !input "orb4_text_y_position"
+  orb4_value_x_position_var: !input "orb4_value_x_position"
+  orb4_value_y_position_var: !input "orb4_value_y_position"
+  orb5_text_y_position_var: !input "orb5_text_y_position"
+  orb5_value_x_position_var: !input "orb5_value_x_position"
+  orb5_value_y_position_var: !input "orb5_value_y_position"
+      
 triggers:
   - trigger: time_pattern
     minutes: !input "trigger_minutes"
@@ -351,10 +445,10 @@ actions:
               "orb-bg": "{{ orb1_bg_color_var }}",
               "orb-textcol": "{{ orb1_textcol_var }}",
               "topicsrc": "{{ orb1_topic_var }}",
-              "xpostxt": "{{ orb1_text_position_var.split('-')[0] }}",
-              "ypostxt": "{{ orb1_text_position_var.split('-')[1] }}",
-              "xposval": {{ orb1_value_position_var.split('-')[0] }},
-              "yposval": {{ orb1_value_position_var.split('-')[1] }},
+              "xpostxt": 110,
+              "ypostxt": "{{ orb1_text_y_position_var }}",
+              "xposval": {{ orb1_value_x_position_var }},
+              "yposval": {{ orb1_value_y_position_var }},
               "orbsize": "{{ orb1_size_var }}",
               "orbvalunit": "{{ orb1_unit_of_measure_var }}",
               "jsonfield": "orb1"  
@@ -365,10 +459,10 @@ actions:
               "orb-bg": "{{ orb2_bg_color_var }}",
               "orb-textcol": "{{ orb2_textcol_var }}",
               "topicsrc": "{{ orb2_topic_var }}",
-              "xpostxt": "{{ orb2_text_position_var.split('-')[0] }}",
-              "ypostxt": "{{ orb2_text_position_var.split('-')[1] }}",
-              "xposval": {{ orb2_value_position_var.split('-')[0] }},
-              "yposval": {{ orb2_value_position_var.split('-')[1] }},
+              "xpostxt": 110,
+              "ypostxt": "{{ orb2_text_y_position_var }}",
+              "xposval": {{ orb2_value_x_position_var }},
+              "yposval": {{ orb2_value_y_position_var }},
               "orbsize": {{ orb2_size_var }},
               "orbvalunit": "{{ orb2_unit_of_measure_var }}",
               "jsonfield": "orb2"
@@ -379,10 +473,10 @@ actions:
               "orb-bg": "{{ orb3_bg_color_var }}",
               "orb-textcol": "{{ orb3_textcol_var }}",
               "topicsrc": "{{ orb3_topic_var }}",
-              "xpostxt": "{{ orb3_text_position_var.split('-')[0] }}",
-              "ypostxt": "{{ orb3_text_position_var.split('-')[1] }}",
-              "xposval": {{ orb3_value_position_var.split('-')[0] }},
-              "yposval": {{ orb3_value_position_var.split('-')[1] }},
+              "xpostxt": 110,
+              "ypostxt": "{{ orb3_text_y_position_var }}",
+              "xposval": {{ orb3_value_x_position_var }},
+              "yposval": {{ orb3_value_y_position_var }},
               "orbsize": {{ orb3_size_var }},
               "orbvalunit": "{{ orb3_unit_of_measure_var }}",
               "jsonfield": "orb3"              
@@ -393,10 +487,10 @@ actions:
               "orb-bg": "{{ orb4_bg_color_var }}",
               "orb-textcol": "{{ orb4_textcol_var }}",
               "topicsrc": "{{ orb4_topic_var }}",
-              "xpostxt": "{{ orb4_text_position_var.split('-')[0] }}",
-              "ypostxt": "{{ orb4_text_position_var.split('-')[1] }}",
-              "xposval": {{ orb4_value_position_var.split('-')[0] }},
-              "yposval": {{ orb4_value_position_var.split('-')[1] }},
+              "xpostxt": 110,
+              "ypostxt": "{{ orb4_text_y_position_var }}",
+              "xposval": {{ orb4_value_x_position_var }},
+              "yposval": {{ orb4_value_y_position_var }},
               "orbsize": {{ orb4_size_var }},
               "orbvalunit": "{{ orb4_unit_of_measure_var }}",
               "jsonfield": "orb4"  
@@ -407,10 +501,10 @@ actions:
               "orb-bg": "{{ orb5_bg_color_var }}",
               "orb-textcol": "{{ orb5_textcol_var }}",
               "topicsrc": "{{ orb5_topic_var }}",
-              "xpostxt": "{{ orb5_text_position_var.split('-')[0] }}",
-              "ypostxt": "{{ orb5_text_position_var.split('-')[1] }}",
-              "xposval": {{ orb5_value_position_var.split('-')[0] }},
-              "yposval": {{ orb5_value_position_var.split('-')[1] }},
+              "xpostxt": 110,
+              "ypostxt": "{{ orb5_text_y_position_var }}",
+              "xposval": {{ orb5_value_x_position_var }},
+              "yposval": {{ orb5_value_y_position_var }},
               "orbsize": {{ orb5_size_var }},
               "orbvalunit": "{{ orb5_unit_of_measure_var }}",
               "jsonfield": "orb5"
@@ -422,7 +516,7 @@ actions:
       minutes: 0
       seconds: 2
       milliseconds: 0
-  - action: mqtt.publish # orb 1
+  - action: mqtt.publish # orb 1 content
     metadata: {}
     data:
       evaluate_payload: false
@@ -433,7 +527,7 @@ actions:
           "orb1": "{{ orb1_template_var }}"
         }
       topic: "{{ orb1_topic_var }}"
-  - action: mqtt.publish
+  - action: mqtt.publish # orb 2 content
     metadata: {}
     data:
       evaluate_payload: false
@@ -444,7 +538,7 @@ actions:
           "orb2": "{{ orb2_template_var }}"
         }
       topic: "{{ orb2_topic_var }}"
-  - action: mqtt.publish
+  - action: mqtt.publish # orb 3 content
     metadata: {}
     data:
       evaluate_payload: false
@@ -455,7 +549,7 @@ actions:
           "orb3": "{{ orb3_template_var }}"
         }
       topic: "{{ orb3_topic_var }}"
-  - action: mqtt.publish
+  - action: mqtt.publish # orb 4 content
     metadata: {}
     data:
       evaluate_payload: false
@@ -466,7 +560,7 @@ actions:
           "orb4": "{{ orb4_template_var }}"
         }
       topic: "{{ orb4_topic_var }}"
-  - action: mqtt.publish
+  - action: mqtt.publish # orb 5 content
     metadata: {}
     data:
       evaluate_payload: false
