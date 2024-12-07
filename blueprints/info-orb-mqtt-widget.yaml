@@ -504,7 +504,7 @@ actions:
     metadata: {}
     data:
       evaluate_payload: false
-      retain: false
+      retain: true
       topic: !input "orb_topic"
       payload: |-
         {
@@ -581,17 +581,12 @@ actions:
             }
           ]
         }
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: 2
-      milliseconds: 0
   - action: mqtt.publish # orb 1 content
     metadata: {}
     data:
       evaluate_payload: false
       qos: 0
-      retain: false
+      retain: true
       payload: |-
         {
           "orb1": "{{ orb1_template_var }}"
@@ -602,7 +597,7 @@ actions:
     data:
       evaluate_payload: false
       qos: 0
-      retain: false
+      retain: true
       payload: |-
         {
           "orb2": "{{ orb2_template_var }}"
@@ -613,7 +608,7 @@ actions:
     data:
       evaluate_payload: false
       qos: 0
-      retain: false
+      retain: true
       payload: |-
         {
           "orb3": "{{ orb3_template_var }}"
@@ -624,7 +619,7 @@ actions:
     data:
       evaluate_payload: false
       qos: 0
-      retain: false
+      retain: true
       payload: |-
         {
           "orb4": "{{ orb4_template_var }}"
