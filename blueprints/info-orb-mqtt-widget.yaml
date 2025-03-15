@@ -1,5 +1,5 @@
 blueprint:
-  name: Info Orb MQTT Widgets
+  name: Info Orb MQTT DrawString Widgets
   description: Creates Info Orb widgets from HA sensors compatible with the Info Orbs MQTT DrawString Widget
   domain: automation
   source_url: https://github.com/warmfusion/info-orbs-mqtt-ha/blob/main/blueprints/info-orb-mqtt-widget.yaml
@@ -33,7 +33,18 @@ blueprint:
       selector:
         text:
           multiline: true
-      default: "{{ states('sensor.time') }}"
+      default: |
+        fill,white
+        fcircle,120,120,100,0xFFE0E0
+        fcircle,120,120,80,0xFFE0FF
+        fcircle,120,120,60,0xE0E0FF
+        fcircle,120,120,40,0xE0FFE0
+        fcircle,120,120,20,0xFFFFE0
+        circle,120,120,100,red
+        circle,120,120,80,magenta
+        circle,120,120,60,blue
+        circle,120,120,40,green
+        circle,120,120,20,yellow
 
     orb2_template:
       name: "Orb 2: Template"
@@ -41,7 +52,14 @@ blueprint:
       selector:
         text:
           multiline: true
-      default: "{{ now().strftime('%A') }}"
+      default: |
+        fill,white
+        ftriangle,120,40,200,180,40,180,0xE0E0FF
+        triangle,120,40,200,180,40,180,blue
+        frectangle,70,90,100,60,0xFFE0E0
+        rectangle,70,90,100,60,red
+        fcircle,120,140,30,0xE0FFE0
+        circle,120,140,30,green
 
     orb3_template:
       name: "Orb 3: Template"
@@ -49,7 +67,28 @@ blueprint:
       selector:
         text:
           multiline: true
-      default: "{{ as_timestamp(state_attr('sun.sun', 'next_rising')) | timestamp_custom('%I:%M %p') }}"
+      default: |
+        {% set is_home =  is_state('binary_sensor.kayley','on') %}
+        {% set cat_color = '0xFFB266' if is_home else '0x666666' %}
+        {% set eye_color = '0xFFFF00' if is_home else '0x666666' %}
+        fill,black
+        fcircle,120,140,40,{{ cat_color }}
+        fcircle,120,90,30,{{ cat_color }}
+        ftriangle,90,85,100,50,110,70,{{ cat_color }}
+        ftriangle,130,70,140,50,150,85,{{ cat_color }}
+        fcircle,110,85,5,{{ eye_color }}
+        fcircle,130,85,5,{{ eye_color }}
+        ftriangle,120,92,115,97,125,97,0xFF69B4
+        line,105,95,75,90,0xFFFFFF
+        line,105,97,75,97,0xFFFFFF
+        line,105,99,75,104,0xFFFFFF
+        line,135,95,165,90,0xFFFFFF
+        line,135,97,165,97,0xFFFFFF
+        line,135,99,165,104,0xFFFFFF
+        font,r
+        fsize,16
+        fcolor,white
+        textc,Kayley {{ "is home" if is_home else "is away" }},120,180
 
     orb4_template:
       name: "Orb 4: Template"
@@ -57,7 +96,21 @@ blueprint:
       selector:
         text:
           multiline: true
-      default: "{{ states('sensor.solar_angle') | float | round(0) }}"
+      default: |
+        fill,black
+        fr,0,70,240,49,white
+        fr,0,111,240,20,lightgrey
+        fcol,white
+        fbcol,black
+        textc,52 Week,120,185,11
+        textc,H: $250.12,120,200,11
+        textc,L: $100.88,120,215,11
+        text,Footsie500,120,121,11,mc,black,lightgrey
+        ftri,110,11,130,11,120,23,red
+        arc,120,120,120,118,0,360,red,black
+        text,12%,120,48,29,mc,red,black
+        text,WRMFSN,120,92,29,mc,black,white
+        text,$288.60,120,155,29,mc,white,black
 
     orb5_template:
       name: "Orb 5: Template"
@@ -65,7 +118,32 @@ blueprint:
       selector:
         text:
           multiline: true
-      default: "{{ states('sensor.date') }}"
+      default: |
+          {% set min_val = 0 | float %}
+          {% set max_val = 100 | float %}
+          {% set range = max_val - min_val %}
+          {% set value = states("sensor.foxess_bat_soc") | float %}
+          {% set green_threshold = 0.8 * 100 | float %}
+          {% set yellow_threshold = 0.9 * 100 | float %}
+
+          {% set normalized = ((value - min_val) / range * 100) | float %}
+          {% set green_deg = 90 + ((green_threshold / 100) * 180) %}
+          {% set yellow_deg = 90 + ((yellow_threshold / 100) * 180) %}
+          fill,black
+          sarc,120,120,100,90,90,{{ green_deg }},0x00FF00,0x003300,f
+          sarc,120,120,100,90,{{ green_deg }},{{ yellow_deg }},0xFFFF00,0x003300,f
+          sarc,120,120,100,90,{{ yellow_deg }},270,0xFF0000,0x003300,f
+          {% set pointer_angle = 180 + (normalized * 1.8) %}
+          {% set pointer_x = 120 + (80 * cos(pointer_angle * 3.14159 / 180)) | round %}
+          {% set pointer_y = 120 + (80 * sin(pointer_angle * 3.14159 / 180)) | round %}
+          line,120,120,{{ pointer_x }},{{ pointer_y }},red
+          fcircle,120,120,8,0x666666
+          font,r
+          fsize,24
+          fcolor,white
+          textc,{{ value }}%,120,120
+          fsize,16
+          textc,Battery,120,80      
 
 variables:
   orb1_template_var: !input "orb1_template"
