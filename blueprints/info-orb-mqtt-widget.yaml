@@ -1,8 +1,8 @@
 blueprint:
   name: Info Orb MQTT Widgets
-  description: Creates Info Orb widgets from HA sensors
+  description: Creates Info Orb widgets from HA sensors compatible with the Info Orbs MQTT DrawString Widget
   domain: automation
-  source_url: https://github.com/dreed47/info-orbs-mqtt-ha/blob/main/blueprints/info-orb-mqtt-widget.yaml
+  source_url: https://github.com/warmfusion/info-orbs-mqtt-ha/blob/main/blueprints/info-orb-mqtt-widget.yaml
 
   input:
     trigger_minutes:
@@ -26,474 +26,53 @@ blueprint:
       selector:
         text:
       default: "info-orbs/setup/orbs"
-    orb1_description:
-      name: "Orb 1: description"
-      default: "Time"
-    orb1_topic:
-      name: "Orb 1: MQTT topic"
-      default: "info-orbs/orb/0"
+
     orb1_template:
-      name: "Orb 1: template"
+      name: "Orb 1: Template"
+      description: "Template to render for orb 1 value"
+      selector:
+        text:
+          multiline: true
       default: "{{ states('sensor.time') }}"
-      description: >-
-        Template exposing something in Home Assistant e.g. {{ states('sensor.weather_station_temperature') | float | round(0) }}
-      selector:
-        text:
-          multiline: true
-    orb1_unit_of_measure:
-      name: "Orb 1: Unit of Measure e.g. %, kWh, °c, mph, inHg"
-      default: " "
-    orb1_bg_color:
-      name: "Orb 1: Background Color"
-      default: &default_bg_color "TFT_DARKGREEN"
-      selector:
-        select:
-          mode: dropdown
-          options: &colors_list
-            - label: BLACK
-              value: "TFT_BLACK"
-            - label: WHITE
-              value: "TFT_WHITE"
-            - label: GREEN
-              value: "TFT_GREEN"
-            - label: NAVY
-              value: "TFT_NAVY"
-            - label: "DARK GREEN"
-              value: "TFT_DARKGREEN"
-            - label: "DARK CYAN"
-              value: "TFT_DARKCYAN"
-            - label: MAROON
-              value: "TFT_MAROON"
-            - label: PURPLE
-              value: "TFT_PURPLE"
-            - label: OLIVE
-              value: "TFT_OLIVE"
-            - label: "LIGHT GREY"
-              value: "TFT_LIGHTGREY"
-            - label: "DARK GREY"
-              value: "TFT_DARKGREY"
-            - label: BLUE
-              value: "TFT_BLUE"
-            - label: GREEN
-              value: "TFT_GREEN"
-            - label: CYAN
-              value: "TFT_CYAN"
-            - label: RED
-              value: "TFT_RED"
-            - label: MAGENTA
-              value: "TFT_MAGENTA"
-            - label: YELLOW
-              value: "TFT_YELLOW"
-            - label: ORANGE
-              value: "TFT_ORANGE"
-            - label: "GREEN YELLOW"
-              value: "TFT_GREENYELLOW"
-            - label: PINK
-              value: "TFT_PINK"
-            - label: BROWN
-              value: "TFT_BROWN"
-            - label: GOLD
-              value: "TFT_GOLD"
-            - label: SILVER
-              value: "TFT_SILVER"
-            - label: "SKY BLUE"
-              value: "TFT_SKYBLUE"
-            - label: VIOLET
-              value: "TFT_VIOLET"
 
-    orb1_textcol:
-      name: "Orb 1: Text Color"
-      default: &default_text_col "TFT_WHITE"
-      selector:
-        select:
-          mode: dropdown
-          options: *colors_list
-    orb1_size:
-      name: "Orb 1: Size"
-      default: 20
-      selector:
-        number:
-          min: 10
-          max: 60
-          mode: slider
-    orb1_text_x_position:
-      name: "Orb 1: Label X position"
-      default: 110
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider
-    orb1_text_y_position:
-      name: "Orb 1: Label Y position"
-      default: 100
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider
-    orb1_value_x_position:
-      name: "Orb 1: Value X position"
-      default: 130
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider
-    orb1_value_y_position:
-      name: "Orb 1: Value Y position"
-      default: 140
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider
-
-    orb2_description:
-      name: "Orb 2: description"
-      default: "Day of week"
-    orb2_topic:
-      name: "Orb 2: MQTT topic"
-      default: "info-orbs/orb/1"
     orb2_template:
-      name: "Orb 2: template"
+      name: "Orb 2: Template"
+      description: "Template to render for orb 2 value"
+      selector:
+        text:
+          multiline: true
       default: "{{ now().strftime('%A') }}"
-      description: >-
-        Template exposing something in Home Assistant e.g. {{ states('sensor.weather_station_humidity') | float | round(1) }}
-      selector:
-        text:
-          multiline: true
-    orb2_unit_of_measure:
-      name: "Orb 2: Unit of Measure e.g. %, kWh, °c, mph, inHg"
-      default: " "
-    orb2_bg_color:
-      name: "Orb 2: Background Color"
-      default: *default_bg_color
-      selector:
-        select:
-          mode: dropdown
-          options: *colors_list
-    orb2_textcol:
-      name: "Orb 2: Text Color"
-      default: *default_text_col
-      selector:
-        select:
-          mode: dropdown
-          options: *colors_list
-    orb2_size:
-      name: "Orb 2: Size"
-      default: 20
-      selector:
-        number:
-          min: 10
-          max: 60
-          mode: slider
-    orb2_text_x_position:
-      name: "Orb 2: Label X position"
-      default: 110
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider          
-    orb2_text_y_position:
-      name: "Orb 2: Label Y position"
-      default: 100
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider
-    orb2_value_x_position:
-      name: "Orb 2: Value X position"
-      default: 130
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider
-    orb2_value_y_position:
-      name: "Orb 2: Value Y position"
-      default: 140
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider
 
-    orb3_description:
-      name: "Orb 3: description"
-      default: "Sun Rise"
-    orb3_topic:
-      name: "Orb 3: MQTT topic"
-      default: "info-orbs/orb/2"
     orb3_template:
-      name: "Orb 3: template"
+      name: "Orb 3: Template"
+      description: "Template to render for orb 3 value"
+      selector:
+        text:
+          multiline: true
       default: "{{ as_timestamp(state_attr('sun.sun', 'next_rising')) | timestamp_custom('%I:%M %p') }}"
-      description: >-
-        Template exposing something in Home Assistant e.g. {{ states('sensor.weather_station_wind_speed') | float | round(1) }}
-      selector:
-        text:
-          multiline: true
-    orb3_unit_of_measure:
-      name: "Orb 3: Unit of Measure e.g. %, kWh, °c, mph, inHg"
-      default: " "
-    orb3_bg_color:
-      name: "Orb 3: Background Color"
-      default: *default_bg_color
-      selector:
-        select:
-          mode: dropdown
-          options: *colors_list
-    orb3_textcol:
-      name: "Orb 3: Text Color"
-      default: *default_text_col
-      selector:
-        select:
-          mode: dropdown
-          options: *colors_list
-    orb3_size:
-      name: "Orb 3: Size"
-      default: 20
-      selector:
-        number:
-          min: 10
-          max: 60
-          mode: slider
-    orb3_text_x_position:
-      name: "Orb 3: Label X position"
-      default: 110
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider          
-    orb3_text_y_position:
-      name: "Orb 3: Label Y position"
-      default: 100
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider
-    orb3_value_x_position:
-      name: "Orb 3: Value X position"
-      default: 130
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider
-    orb3_value_y_position:
-      name: "Orb 3: Value Y position"
-      default: 140
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider
 
-    orb4_description:
-      name: "Orb 4: description"
-      default: "Sun Angle"
-    orb4_topic:
-      name: "Orb 4: MQTT topic"
-      default: "info-orbs/orb/3"
     orb4_template:
-      name: "Orb 4: template"
-      description: >-
-        Template exposing something in Home Assistant e.g. {{ states('sensor.weather_station_air_pressure') | float | round(2) }}
-      default: >-
-        {{ states('sensor.solar_angle') | float | round(0) }}
+      name: "Orb 4: Template"
+      description: "Template to render for orb 4 value"
       selector:
         text:
           multiline: true
-    orb4_unit_of_measure:
-      name: "Orb 4: Unit of Measure e.g. %, kWh, °c, mph, inHg"
-      default: " degrees"
-    orb4_bg_color:
-      name: "Orb 4: Background Color"
-      default: *default_bg_color
-      selector:
-        select:
-          mode: dropdown
-          options: *colors_list
-    orb4_textcol:
-      name: "Orb 4: Text Color"
-      default: *default_text_col
-      selector:
-        select:
-          mode: dropdown
-          options: *colors_list
-    orb4_size:
-      name: "Orb 4: Size"
-      default: 20
-      selector:
-        number:
-          min: 10
-          max: 60
-          mode: slider
-    orb4_text_x_position:
-      name: "Orb 4: Label X position"
-      default: 110
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider          
-    orb4_text_y_position:
-      name: "Orb 4: Label Y position"
-      default: 100
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider
-    orb4_value_x_position:
-      name: "Orb 4: Value X position"
-      default: 130
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider
-    orb4_value_y_position:
-      name: "Orb 4: Value Y position"
-      default: 140
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider
+      default: "{{ states('sensor.solar_angle') | float | round(0) }}"
 
-    orb5_description:
-      name: "Orb 5: description"
-      default: "Date"
-    orb5_topic:
-      name: "Orb 5: MQTT topic"
-      default: "info-orbs/orb/4"
     orb5_template:
-      name: "Orb 5: template"
-      default: "{{ states('sensor.date') }}"
-      description: >-
-        Template exposing something in Home Assistant e.g. {{ states('sensor.weather_hub_sensors_battery') | float | round(1) }}
+      name: "Orb 5: Template"
+      description: "Template to render for orb 5 value"
       selector:
         text:
           multiline: true
-    orb5_unit_of_measure:
-      name: "Orb 5: Unit of Measure e.g. %, kWh, °c, mph, inHg"
-      default: " "
-    orb5_bg_color:
-      name: "Orb 5: Background Color"
-      default: *default_bg_color
-      selector:
-        select:
-          mode: dropdown
-          options: *colors_list
-    orb5_textcol:
-      name: "Orb 5: Text Color"
-      default: *default_text_col
-      selector:
-        select:
-          mode: dropdown
-          options: *colors_list
-    orb5_size:
-      name: "Orb 5: Size"
-      default: 20
-      selector:
-        number:
-          min: 10
-          max: 60
-          mode: slider
-    orb5_text_x_position:
-      name: "Orb 5: Label X position"
-      default: 110
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider        
-    orb5_text_y_position:
-      name: "Orb 5: Label Y position"
-      default: 100
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider
-    orb5_value_x_position:
-      name: "Orb 5: Value X position"
-      default: 130
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider
-    orb5_value_y_position:
-      name: "Orb 5: Value Y position"
-      default: 140
-      selector:
-        number:
-          min: 0
-          max: 300
-          mode: slider
+      default: "{{ states('sensor.date') }}"
 
 variables:
-  orb1_description_var: !input "orb1_description"
-  orb2_description_var: !input "orb2_description"
-  orb3_description_var: !input "orb3_description"
-  orb4_description_var: !input "orb4_description"
-  orb5_description_var: !input "orb5_description"
-  orb1_bg_color_var: !input "orb1_bg_color"
-  orb2_bg_color_var: !input "orb2_bg_color"
-  orb3_bg_color_var: !input "orb3_bg_color"
-  orb4_bg_color_var: !input "orb4_bg_color"
-  orb5_bg_color_var: !input "orb5_bg_color"
-  orb1_textcol_var: !input "orb1_textcol"
-  orb2_textcol_var: !input "orb2_textcol"
-  orb3_textcol_var: !input "orb3_textcol"
-  orb4_textcol_var: !input "orb4_textcol"
-  orb5_textcol_var: !input "orb5_textcol"
-  orb1_topic_var: !input "orb1_topic"
-  orb2_topic_var: !input "orb2_topic"
-  orb3_topic_var: !input "orb3_topic"
-  orb4_topic_var: !input "orb4_topic"
-  orb5_topic_var: !input "orb5_topic"
   orb1_template_var: !input "orb1_template"
   orb2_template_var: !input "orb2_template"
   orb3_template_var: !input "orb3_template"
   orb4_template_var: !input "orb4_template"
   orb5_template_var: !input "orb5_template"
-  orb1_unit_of_measure_var: !input "orb1_unit_of_measure"
-  orb2_unit_of_measure_var: !input "orb2_unit_of_measure"
-  orb3_unit_of_measure_var: !input "orb3_unit_of_measure"
-  orb4_unit_of_measure_var: !input "orb4_unit_of_measure"
-  orb5_unit_of_measure_var: !input "orb5_unit_of_measure"
-  orb1_size_var: !input "orb1_size"
-  orb2_size_var: !input "orb2_size"
-  orb3_size_var: !input "orb3_size"
-  orb4_size_var: !input "orb4_size"
-  orb5_size_var: !input "orb5_size"
-  orb1_text_x_position_var: !input "orb1_text_x_position"  
-  orb1_text_y_position_var: !input "orb1_text_y_position"
-  orb1_value_x_position_var: !input "orb1_value_x_position"
-  orb1_value_y_position_var: !input "orb1_value_y_position"
-  orb2_text_x_position_var: !input "orb2_text_x_position"
-  orb2_text_y_position_var: !input "orb2_text_y_position"
-  orb2_value_x_position_var: !input "orb2_value_x_position"
-  orb2_value_y_position_var: !input "orb2_value_y_position"
-  orb3_text_x_position_var: !input "orb3_text_x_position"
-  orb3_text_y_position_var: !input "orb3_text_y_position"
-  orb3_value_x_position_var: !input "orb3_value_x_position"
-  orb3_value_y_position_var: !input "orb3_value_y_position"
-  orb4_text_x_position_var: !input "orb4_text_x_position"
-  orb4_text_y_position_var: !input "orb4_text_y_position"
-  orb4_value_x_position_var: !input "orb4_value_x_position"
-  orb4_value_y_position_var: !input "orb4_value_y_position"
-  orb5_text_x_position_var: !input "orb5_text_x_position"
-  orb5_text_y_position_var: !input "orb5_text_y_position"
-  orb5_value_x_position_var: !input "orb5_value_x_position"
-  orb5_value_y_position_var: !input "orb5_value_y_position"
 
 triggers:
   - trigger: time_pattern
@@ -511,129 +90,69 @@ actions:
           "orbs": [
             {
               "orbid": 0,
-              "orbdesc": "{{ orb1_description_var }}",
-              "orb-bg": "{{ orb1_bg_color_var }}",
-              "orb-textcol": "{{ orb1_textcol_var }}",
-              "topicsrc": "{{ orb1_topic_var }}",
-              "xpostxt": "{{ orb1_text_x_position_var }}",
-              "ypostxt": "{{ orb1_text_y_position_var }}",
-              "xposval": {{ orb1_value_x_position_var }},
-              "yposval": {{ orb1_value_y_position_var }},
-              "orbsize": "{{ orb1_size_var }}",
-              "orbvalunit": "{{ orb1_unit_of_measure_var }}",
-              "jsonfield": "orb1"  
+              "topicsrc": "info-orbs/orb/0",
+              "drawscript": 1
             },
             {
               "orbid": 1,
-              "orbdesc": "{{ orb2_description_var }}",
-              "orb-bg": "{{ orb2_bg_color_var }}",
-              "orb-textcol": "{{ orb2_textcol_var }}",
-              "topicsrc": "{{ orb2_topic_var }}",
-              "xpostxt": "{{ orb2_text_x_position_var }}",
-              "ypostxt": "{{ orb2_text_y_position_var }}",
-              "xposval": {{ orb2_value_x_position_var }},
-              "yposval": {{ orb2_value_y_position_var }},
-              "orbsize": {{ orb2_size_var }},
-              "orbvalunit": "{{ orb2_unit_of_measure_var }}",
-              "jsonfield": "orb2"
+              "topicsrc": "info-orbs/orb/1",
+              "drawscript": 1
             },
             {
               "orbid": 2,
-              "orbdesc": "{{ orb3_description_var }}",
-              "orb-bg": "{{ orb3_bg_color_var }}",
-              "orb-textcol": "{{ orb3_textcol_var }}",
-              "topicsrc": "{{ orb3_topic_var }}",
-              "xpostxt": "{{ orb3_text_x_position_var }}",
-              "ypostxt": "{{ orb3_text_y_position_var }}",
-              "xposval": {{ orb3_value_x_position_var }},
-              "yposval": {{ orb3_value_y_position_var }},
-              "orbsize": {{ orb3_size_var }},
-              "orbvalunit": "{{ orb3_unit_of_measure_var }}",
-              "jsonfield": "orb3"              
+              "topicsrc": "info-orbs/orb/2",
+              "drawscript": 1
             },
             {
               "orbid": 3,
-              "orbdesc": "{{ orb4_description_var }}",
-              "orb-bg": "{{ orb4_bg_color_var }}",
-              "orb-textcol": "{{ orb4_textcol_var }}",
-              "topicsrc": "{{ orb4_topic_var }}",
-              "xpostxt": "{{ orb4_text_x_position_var }}",
-              "ypostxt": "{{ orb4_text_y_position_var }}",
-              "xposval": {{ orb4_value_x_position_var }},
-              "yposval": {{ orb4_value_y_position_var }},
-              "orbsize": {{ orb4_size_var }},
-              "orbvalunit": "{{ orb4_unit_of_measure_var }}",
-              "jsonfield": "orb4"  
+              "topicsrc": "info-orbs/orb/3",
+              "drawscript": 1
             },
             {
               "orbid": 4,
-              "orbdesc": "{{ orb5_description_var }}",
-              "orb-bg": "{{ orb5_bg_color_var }}",
-              "orb-textcol": "{{ orb5_textcol_var }}",
-              "topicsrc": "{{ orb5_topic_var }}",
-              "xpostxt": "{{ orb5_text_x_position_var }}",
-              "ypostxt": "{{ orb5_text_y_position_var }}",
-              "xposval": {{ orb5_value_x_position_var }},
-              "yposval": {{ orb5_value_y_position_var }},
-              "orbsize": {{ orb5_size_var }},
-              "orbvalunit": "{{ orb5_unit_of_measure_var }}",
-              "jsonfield": "orb5"
+              "topicsrc": "info-orbs/orb/4",
+              "drawscript": 1
             }
           ]
         }
   - action: mqtt.publish # orb 1 content
     metadata: {}
     data:
-      evaluate_payload: false
+      evaluate_payload: true
       qos: 0
       retain: true
-      payload: |-
-        {
-          "orb1": "{{ orb1_template_var }}"
-        }
-      topic: "{{ orb1_topic_var }}"
+      payload: "{{ orb1_template_var }}"
+      topic: "info-orbs/orb/0"
   - action: mqtt.publish # orb 2 content
     metadata: {}
     data:
-      evaluate_payload: false
+      evaluate_payload: true
       qos: 0
       retain: true
-      payload: |-
-        {
-          "orb2": "{{ orb2_template_var }}"
-        }
-      topic: "{{ orb2_topic_var }}"
+      payload: "{{ orb2_template_var }}"
+      topic: "info-orbs/orb/1"
   - action: mqtt.publish # orb 3 content
     metadata: {}
     data:
-      evaluate_payload: false
+      evaluate_payload: true
       qos: 0
       retain: true
-      payload: |-
-        {
-          "orb3": "{{ orb3_template_var }}"
-        }
-      topic: "{{ orb3_topic_var }}"
+      payload: "{{ orb3_template_var }}"
+      topic: "info-orbs/orb/2"
   - action: mqtt.publish # orb 4 content
     metadata: {}
     data:
-      evaluate_payload: false
+      evaluate_payload: true
       qos: 0
       retain: true
-      payload: |-
-        {
-          "orb4": "{{ orb4_template_var }}"
-        }
-      topic: "{{ orb4_topic_var }}"
+      payload: "{{ orb4_template_var }}"
+      topic: "info-orbs/orb/3"
   - action: mqtt.publish # orb 5 content
     metadata: {}
     data:
-      evaluate_payload: false
+      evaluate_payload: true
       qos: 0
       retain: true
-      payload: |-
-        {
-          "orb5": "{{ orb5_template_var }}"
-        }
-      topic: "{{ orb5_topic_var }}"
+      payload: "{{ orb5_template_var }}"
+      topic: "info-orbs/orb/4"
 mode: single
